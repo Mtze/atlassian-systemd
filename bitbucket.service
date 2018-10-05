@@ -1,13 +1,14 @@
-	[Unit]
-	Description=Bitbucket  the Git solution for professional teams
-	After=syslog.target network.target
-	 
-	[Service]
-	Type=forking
-	User=bitbucket
-	PIDFile=/var/atlassian/application-data/bitbucket/log/bitbucket.pid
-	ExecStart=/opt/atlassian/bitbucket/bin/start-bitbucket.sh
-	ExecStop=/opt/atlassian/bitbucket/bin/stop-bitbucket.sh
-	 
-	[Install]
-	WantedBy=multi-user.target
+[Unit]
+Description=Atlassian Bitbucket Server Service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+User=atlbitbucket
+Environment=BITBUCKET_HOME=/opt/atlassian/bitbucket/bitbucket_home
+UMask=0027
+ExecStart=/opt/atlassian/bitbucket/bitbucket_install/bin/start-bitbucket.sh
+ExecStop=/opt/atlassian/bitbucket/bitbucket_install/bin/stop-bitbucket.sh
+
+[Install]
+WantedBy=multi-user.target
